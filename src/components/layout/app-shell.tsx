@@ -16,6 +16,7 @@ import {
   Warehouse,
   X,
 } from "lucide-react";
+import { PageTransition } from "@/components/layout/page-transition";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +56,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             onClick={() => setMobileOpen(false)}
           />
           <aside className="relative flex h-full w-[min(20rem,86vw)] flex-col border-r border-slate-200 bg-white shadow-2xl">
-            <div className="flex h-16 items-center justify-between border-b border-slate-200 px-4">
+            <div className="flex h-28 items-center justify-between border-b border-slate-200 px-4">
               <Brand />
               <Button type="button" variant="ghost" size="icon" onClick={() => setMobileOpen(false)} aria-label="Cerrar menú">
                 <X className="h-5 w-5" />
@@ -93,7 +94,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </header>
-        <div className="px-4 py-6 sm:px-6 lg:px-8">{children}</div>
+        <PageTransition>{children}</PageTransition>
       </main>
     </div>
   );
@@ -105,9 +106,9 @@ function Brand() {
       src="/brand/beaver-logo.svg"
       alt="Beaver, desarrollado por Bananas4Monkeys"
       width={190}
-      height={36}
+      height={88}
       priority
-      className="h-9 w-auto max-w-[11.5rem] object-contain object-left"
+      className="h-[5.5rem] w-auto max-w-full object-contain object-left"
     />
   );
 }
@@ -115,7 +116,7 @@ function Brand() {
 function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate: () => void }) {
   return (
     <>
-      <div className="flex h-16 items-center border-b border-slate-200 px-6">
+      <div className="flex h-28 items-center border-b border-slate-200 px-4">
         <Brand />
       </div>
       <SidebarNav pathname={pathname} onNavigate={onNavigate} />
@@ -134,7 +135,7 @@ function SidebarNav({ pathname, onNavigate, mobile = false }: { pathname: string
             href={item.href}
             onClick={onNavigate}
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950",
+              "flex items-center gap-3 rounded-md px-3 text-sm font-medium text-slate-600 transition-all duration-150 hover:bg-slate-100 hover:text-slate-950 active:scale-[0.99]",
               mobile ? "py-3" : "py-2.5",
               isActive(pathname, item.href) && "bg-emerald-50 text-emerald-700",
             )}
